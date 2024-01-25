@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Simulation</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #dice {
+      font-size: 48px;
+      padding: 20px;
+      border: 2px solid #333;
+      margin-right: 20px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="dice">1</div>
+<button onclick="rollDice()">Roll Dice</button>
+
+<script>
+  function rollDice() {
+    // Generate a random number between 1 and 6 for the dice roll
+    const diceResult = Math.floor(Math.random() * 6) + 1;
+
+    // Update the content of the dice element with the result
+    document.getElementById('dice').innerText = diceResult;
+  }
+</script>
+
+</body>
+</html>

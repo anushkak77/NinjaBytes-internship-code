@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Countdown Timer</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #3f3f3f;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #timer-container {
+      text-align: center;
+    }
+
+    #timer {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    #inputForm {
+      text-align: center;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #1abc9c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      background-color: #148f77;
+    }
+  </style>
+</head>
+<body>
+
+<div id="timer-container">
+  <div id="timer">00:00:00</div>
+
+  <div id="inputForm">
+    <label for="duration">Set Countdown Time (seconds):</label>
+    <input type="number" id="duration" min="1" placeholder="Enter seconds">
+    <button onclick="startCountdown()">Start Countdown</button>
+    <button onclick="stopCountdown()">Stop Countdown</button>
+  </div>
+</div>
+
+<script>
+  let intervalId;
+
+  function startCountdown() {
+    const durationInput = document.getElementById("duration");
+    const timerElement = document.getElementById("timer");
+    let timer = parseInt(durationInput.value, 10) || 0;
+
+    if (timer <= 0) {
+      alert("Please enter a valid positive number for the countdown.");
+      return;
+    }
+
+    const updateTimer = () => {
+      const hours = Math.floor(timer / 3600);
+      const minutes = Math.floor((timer % 3600) / 60);
+      const seconds = timer % 60;
+
+      timerElement.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+
+      if (--timer < 0) {
+        clearInterval(intervalId);
+        timerElement.textContent = "Time's up!";
+      }
+    };
+
+    const formatTime = (time) => {
+      return time < 10 ? `0${time}` : time;
+    };
+
+    updateTimer();
+    intervalId = setInterval(updateTimer, 1000);
+  }
+
+  function stopCountdown() {
+    clearInterval(intervalId);
+    document.getElementById("timer").textContent = "Countdown stopped";
+  }
+</script>
+
+</body>
+</html>
